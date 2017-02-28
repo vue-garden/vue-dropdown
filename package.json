@@ -1,6 +1,6 @@
 {
   "name": "hsy-vue-dropdown",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "vue dropdown component.",
   "author": "hsiaosiyuan0 <hsiaosiyuan0@outlook.com>",
   "main": "lib/index.js",

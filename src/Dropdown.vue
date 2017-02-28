@@ -96,7 +96,6 @@ export default {
     data: {
       immediate: true,
       handler(val) {
-        console.log(1)
         this.selected = this.data.filter(d => d.selected)
         this.items = this.data.slice(0)
       }
