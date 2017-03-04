@@ -137,18 +137,14 @@ export default {
       }
     },
     findSelected() {
-      if (this.multiple) {
+      if (!this.grouped) {
         return this.data.filter(d => d.selected === true)
       }
-      let ret = null
-      this.data.every((d) => {
-        if (d.selected) {
-          ret = d
-          return false
-        }
-        return true
-      })
-      return ret === null ? [] : [ret]
+      let items = []
+      return this.data.reduce((pre, e) => {
+        pre = pre.concat(e.children)
+        return pre
+      }, items).filter(d => d.selected === true)
     },
     itemClicked(item) {
       if (!this.multiple) {
@@ -337,12 +333,12 @@ export default {
 
 .hsy-dropdown .group h3 {
   font-size: 1.2em;
-  font-weight: normal;
+  font-weight: 500;
   padding-left: 5px;
   cursor: default;
 }
 
-.hsy-dropdown .group label {
+.hsy-dropdown .group .item {
   font-size: 1.2em;
 }
 </style>
