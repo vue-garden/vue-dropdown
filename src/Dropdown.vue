@@ -4,15 +4,30 @@
   <transition name="fadeIn" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
     <div class="list" v-show="isShow" :style="{width: fixListWidth ? width + 'px' : 'auto'}">
       <div class="inner">
-        <div class="item" v-for="item in items" :data-title="item.label" @click="!multiple && itemClicked(item)" :class="{selected: item.selected}">
+        <div class="item" v-if="!grouped" v-for="item in items" :data-title="item.label" @click="!multiple && itemClicked(item)" :class="{selected: item.selected}">
           {{ appendIdx(item) }}
-          <template v-if="multiple">
+          <div v-if="multiple">
             <input type="checkbox" :disabled="item.disabled" :checked="item.selected" @change="checkboxChanged(item)" :id="id(item)">
             <label :for="id(item)" @click="itemClicked(item)">{{ item.label }}</label>
-</template>
-          <template v-else>
- {{ item.label }}
-</template>
+          </div>
+          <div v-else>
+            {{ item.label }}
+          </div>
+        </div>
+        <div v-if="grouped">
+          <div v-for="group in items" class="group">
+            <h3>{{ group.label }}</h3>
+            <div class="item" v-for="item in group.children" :data-title="item.label" @click="!multiple && itemClicked(item)" :class="{selected: item.selected}">
+              {{ appendIdx(item) }}
+              <div v-if="multiple">
+                <input type="checkbox" :disabled="item.disabled" :checked="item.selected" @change="checkboxChanged(item)" :id="id(item)">
+                <label :for="id(item)" @click="itemClicked(item)">{{ item.label }}</label>
+              </div>
+              <div v-else>
+                {{ item.label }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -314,5 +329,20 @@ export default {
 .hsy-dropdown.multiple .item input:disabled+label {
   color: #ccc;
   cursor: not-allowed;
+}
+
+.hsy-dropdown .group {
+  font-size: 10px;
+}
+
+.hsy-dropdown .group h3 {
+  font-size: 1.2em;
+  font-weight: normal;
+  padding-left: 5px;
+  cursor: default;
+}
+
+.hsy-dropdown .group label {
+  font-size: 1.2em;
 }
 </style>

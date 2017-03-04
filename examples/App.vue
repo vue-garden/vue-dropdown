@@ -6,6 +6,9 @@
   <section id="dropdown-2">
     <dropdown :data="data1" multiple :width="200" :cbItemChanged="changed2" :cbCustomSelectedText="customSelectedText"></dropdown>
   </section>
+  <section id="dropdown-3">
+    <dropdown :data="data2" multiple grouped :width="200" :cbItemChanged="changed2" :cbCustomSelectedText="customSelectedText"></dropdown>
+  </section>
 </section>
 </template>
 
